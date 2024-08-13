@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: k6-load-test
+spec:
+  template:
+    metadata:
+      name: k6-load-test
+    spec:
+      containers:
+      - name: k6
+        image: loadimpact/k6:latest
+        args: ["run", "/tests/loadtest.js"]
+        volumeMounts:
+        - name: test-config
+          mountPath: /tests
+      restartPolicy: Never
+      volumes:
+      - name: test-config
+        configMap:
+          name: k6-test-script
