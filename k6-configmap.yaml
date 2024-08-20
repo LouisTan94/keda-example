@@ -13,6 +13,6 @@ data:
     };
 
     export default function () {
-      http.get('http://web-app-service');
+      http.get('http://nginx-metrics.default.svc.cluster.local:9113');
       sleep(1);
     }
